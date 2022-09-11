@@ -48,4 +48,21 @@ public class Vote {
     public Product getProduct() {
         return product;
     }
+
+    @PrePersist
+    private void onCreate() {
+        this.id = UUID.randomUUID();
+        this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", score=" + score +
+                ", isSubmitted=" + isSubmitted +
+                ", product=" + product +
+                '}';
+    }
 }

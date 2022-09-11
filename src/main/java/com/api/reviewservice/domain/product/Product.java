@@ -65,4 +65,21 @@ public class Product {
     public Set<Vote> getVotes() {
         return votes;
     }
+
+    @PrePersist
+    private void onCreate() {
+        this.id = UUID.randomUUID();
+        this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", provider=" + provider +
+                ", showComments=" + showComments +
+                ", showVotes=" + showVotes +
+                '}';
+    }
 }

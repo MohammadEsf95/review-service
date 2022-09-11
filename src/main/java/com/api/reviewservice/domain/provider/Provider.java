@@ -23,6 +23,10 @@ public class Provider {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "provider")
     private Set<Product> products;
 
+    public Provider(String name) {
+        this.name = name;
+    }
+
     public Provider() {
     }
 
@@ -40,5 +44,20 @@ public class Provider {
 
     public Set<Product> getProducts() {
         return products;
+    }
+
+    @PrePersist
+    private void onCreate() {
+        this.id = UUID.randomUUID();
+        this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

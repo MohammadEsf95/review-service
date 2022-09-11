@@ -48,4 +48,21 @@ public class Comment {
     public boolean isSubmitted() {
         return isSubmitted;
     }
+
+    @PrePersist
+    private void onCreate() {
+        this.id = UUID.randomUUID();
+        this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", createDate=" + createDate +
+                ", product=" + product +
+                ", isSubmitted=" + isSubmitted +
+                '}';
+    }
 }
