@@ -1,6 +1,7 @@
 package com.api.reviewservice.infrastructure.exception;
 
 public enum ExceptionMessages {
+    RECORD_NOT_FOUND(8, "Record not found."),
     ;
 
     private final int index;

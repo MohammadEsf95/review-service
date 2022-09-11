@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Provider {
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     @Column(name = "create_date", updatable = false)
