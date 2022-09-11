@@ -28,4 +28,24 @@ public class Vote {
 
     public Vote() {
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public boolean isSubmitted() {
+        return isSubmitted;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
 }

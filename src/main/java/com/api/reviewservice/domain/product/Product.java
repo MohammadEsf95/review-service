@@ -37,4 +37,32 @@ public class Product {
 
     public Product() {
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public boolean isShowComments() {
+        return showComments;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public boolean isShowVotes() {
+        return showVotes;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
 }

@@ -25,4 +25,20 @@ public class Provider {
 
     public Provider() {
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
 }

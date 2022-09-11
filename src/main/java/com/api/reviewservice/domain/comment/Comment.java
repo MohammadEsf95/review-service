@@ -28,4 +28,24 @@ public class Comment {
 
     public Comment() {
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public boolean isSubmitted() {
+        return isSubmitted;
+    }
 }
