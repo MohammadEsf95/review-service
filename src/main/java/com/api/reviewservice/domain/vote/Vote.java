@@ -1,5 +1,6 @@
 package com.api.reviewservice.domain.vote;
 
+import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
@@ -8,15 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "votes")
-public class Vote {
-
-    @Id
-    @Column(columnDefinition = "uuid")
-    private UUID id;
-
-    @Column(name = "create_date", updatable = false)
-    private LocalDateTime createDate;
-
+public class Vote extends BaseEntity {
     @Column(name = "score")
     private int score;
 
@@ -36,14 +29,6 @@ public class Vote {
         this.product = product;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
     public int getScore() {
         return score;
     }
@@ -56,20 +41,12 @@ public class Vote {
         return product;
     }
 
-    @PrePersist
-    private void onCreate() {
-        this.id = UUID.randomUUID();
-        this.createDate = LocalDateTime.now();
-    }
-
     @Override
     public String toString() {
         return "Vote{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", score=" + score +
+                "score=" + score +
                 ", isSubmitted=" + isSubmitted +
                 ", product=" + product +
-                '}';
+                '}' + super.toString();
     }
 }

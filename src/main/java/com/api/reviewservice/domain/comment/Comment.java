@@ -1,5 +1,6 @@
 package com.api.reviewservice.domain.comment;
 
+import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
@@ -8,17 +9,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "comments")
-public class Comment {
-
-    @Id
-    @Column(columnDefinition = "uuid")
-    private UUID id;
-
+public class Comment extends BaseEntity {
     @Column(name = "text")
     private String text;
-
-    @Column(name = "create_date", updatable = false)
-    private LocalDateTime createDate;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -36,16 +29,8 @@ public class Comment {
         this.isSubmitted = isSubmitted;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
     public String getText() {
         return text;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
     }
 
     public Product getProduct() {
@@ -56,20 +41,12 @@ public class Comment {
         return isSubmitted;
     }
 
-    @PrePersist
-    private void onCreate() {
-        this.id = UUID.randomUUID();
-        this.createDate = LocalDateTime.now();
-    }
-
     @Override
     public String toString() {
         return "Comment{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", createDate=" + createDate +
+                "text='" + text +
                 ", product=" + product +
                 ", isSubmitted=" + isSubmitted +
-                '}';
+                '}' + super.toString();
     }
 }

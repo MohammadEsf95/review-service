@@ -1,5 +1,6 @@
 package com.api.reviewservice.domain.product;
 
+import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.comment.Comment;
 import com.api.reviewservice.domain.provider.Provider;
 import com.api.reviewservice.domain.vote.Vote;
@@ -12,15 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "products")
-public class Product {
-
-    @Id
-    @Column(columnDefinition = "uuid")
-    private UUID id;
-
-    @Column(name = "create_date", updatable = false)
-    private LocalDateTime createDate;
-
+public class Product extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "provider_id")
     private Provider provider;
@@ -56,14 +49,6 @@ public class Product {
         this.votes = new HashSet<>();
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
     public Provider getProvider() {
         return provider;
     }
@@ -92,22 +77,14 @@ public class Product {
         return hasVote;
     }
 
-    @PrePersist
-    private void onCreate() {
-        this.id = UUID.randomUUID();
-        this.createDate = LocalDateTime.now();
-    }
-
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", provider=" + provider +
+                "provider=" + provider +
                 ", showComments=" + showComments +
                 ", showVotes=" + showVotes +
                 ", hasComment=" + hasComment +
                 ", hasVote=" + hasVote +
-                '}';
+                '}' + super.toString();
     }
 }

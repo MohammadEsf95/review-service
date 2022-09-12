@@ -1,5 +1,6 @@
 package com.api.reviewservice.domain.provider;
 
+import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
@@ -9,14 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "providers")
-public class Provider {
-
-    @Id
-    @Column(columnDefinition = "uuid")
-    private UUID id;
-
-    @Column(name = "create_date", updatable = false)
-    private LocalDateTime createDate;
+public class Provider extends BaseEntity {
 
     @Column(name = "name")
     private String name;
@@ -31,14 +25,6 @@ public class Provider {
     public Provider() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-
     public String getName() {
         return name;
     }
@@ -47,18 +33,11 @@ public class Provider {
         return products;
     }
 
-    @PrePersist
-    private void onCreate() {
-        this.id = UUID.randomUUID();
-        this.createDate = LocalDateTime.now();
-    }
-
     @Override
     public String toString() {
         return "Provider{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", name='" + name + '\'' +
-                '}';
+                "name='" + name + '\'' +
+                ", products=" + products +
+                '}' + super.toString();
     }
 }
