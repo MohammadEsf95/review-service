@@ -30,6 +30,12 @@ public class Vote {
     public Vote() {
     }
 
+    public Vote(int score, boolean isSubmitted, Product product) {
+        this.score = score;
+        this.isSubmitted = isSubmitted;
+        this.product = product;
+    }
+
     public UUID getId() {
         return id;
     }
