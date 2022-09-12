@@ -6,14 +6,15 @@ import com.api.reviewservice.domain.provider.Provider;
 import com.api.reviewservice.domain.vote.Vote;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
+
+    @Column(name = "name")
+    private String name;
     @ManyToOne
     @JoinColumn(name = "provider_id")
     private Provider provider;
@@ -27,11 +28,11 @@ public class Product extends BaseEntity {
     @Column(name = "show_votes")
     private boolean showVotes;
 
-    @Column(name = "has_comment")
-    private boolean hasComment;
+    @Column(name = "commentable")
+    private boolean commentable;
 
-    @Column(name = "has_vote")
-    private boolean hasVote;
+    @Column(name = "votable")
+    private boolean votable;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private Set<Vote> votes;
@@ -39,14 +40,19 @@ public class Product extends BaseEntity {
     public Product() {
     }
 
-    public Product(Provider provider, boolean showComments, boolean showVotes, boolean hasComment, boolean hasVote) {
+    public Product(String name, Provider provider, boolean showComments, boolean showVotes, boolean hasComment, boolean votable) {
+        this.name = name;
         this.provider = provider;
         this.showComments = showComments;
         this.showVotes = showVotes;
-        this.hasComment = hasComment;
-        this.hasVote = hasVote;
+        this.commentable = hasComment;
+        this.votable = votable;
         this.comments = new HashSet<>();
         this.votes = new HashSet<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Provider getProvider() {
@@ -69,12 +75,12 @@ public class Product extends BaseEntity {
         return votes;
     }
 
-    public boolean isHasComment() {
-        return hasComment;
+    public boolean isCommentable() {
+        return commentable;
     }
 
-    public boolean isHasVote() {
-        return hasVote;
+    public boolean isVotable() {
+        return votable;
     }
 
     @Override
@@ -83,8 +89,8 @@ public class Product extends BaseEntity {
                 "provider=" + provider +
                 ", showComments=" + showComments +
                 ", showVotes=" + showVotes +
-                ", hasComment=" + hasComment +
-                ", hasVote=" + hasVote +
+                ", hasComment=" + commentable +
+                ", hasVote=" + votable +
                 '}' + super.toString();
     }
 }

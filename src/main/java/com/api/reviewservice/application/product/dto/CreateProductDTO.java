@@ -14,17 +14,18 @@ public record CreateProductDTO(
         boolean showComments,
         boolean showVotes,
         boolean showRatings,
-        boolean hasComment,
-        boolean hasVote
+        boolean commentable,
+        boolean votable
 ) {
 
     public static Product to(CreateProductDTO createProductDTO, Provider provider) {
         return new Product(
+                createProductDTO.name(),
                 provider,
                 createProductDTO.showComments(),
                 createProductDTO.showVotes(),
-                createProductDTO.hasComment(),
-                createProductDTO.hasVote()
+                createProductDTO.commentable(),
+                createProductDTO.votable()
         );
     }
 }
