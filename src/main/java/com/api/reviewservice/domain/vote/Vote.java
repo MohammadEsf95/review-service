@@ -11,6 +11,7 @@ import java.util.UUID;
 public class Vote {
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     @Column(name = "create_date", updatable = false)

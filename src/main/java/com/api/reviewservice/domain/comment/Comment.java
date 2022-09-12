@@ -11,6 +11,7 @@ import java.util.UUID;
 public class Comment {
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     @Column(name = "text")
@@ -27,6 +28,12 @@ public class Comment {
     private boolean isSubmitted;
 
     public Comment() {
+    }
+
+    public Comment(String text, Product product, boolean isSubmitted) {
+        this.text = text;
+        this.product = product;
+        this.isSubmitted = isSubmitted;
     }
 
     public UUID getId() {
