@@ -19,6 +19,8 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "provider_id")
     private Provider provider;
 
+    @Column(name = "average_score")
+    private float averageScore;
     @Column(name = "is_visible")
     private boolean isVisible;
     @Column(name = "show_comments")
@@ -45,6 +47,7 @@ public class Product extends BaseEntity {
     public Product(String name, Provider provider, boolean isVisible, boolean showComments, boolean showScores, boolean hasComment, boolean scoreable) {
         this.name = name;
         this.provider = provider;
+        this.averageScore = 0.0f;
         this.isVisible = isVisible;
         this.showComments = showComments;
         this.showScores = showScores;
@@ -60,6 +63,10 @@ public class Product extends BaseEntity {
 
     public Provider getProvider() {
         return provider;
+    }
+
+    public float getAverageScore() {
+        return averageScore;
     }
 
     public boolean isVisible() {
@@ -105,6 +112,7 @@ public class Product extends BaseEntity {
         return "Product{" +
                 "provider=" + provider +
                 ", isVisible=" + isVisible +
+                ", averageScore=" + averageScore +
                 ", showComments=" + showComments +
                 ", showScores=" + showScores +
                 ", hasComment=" + commentable +

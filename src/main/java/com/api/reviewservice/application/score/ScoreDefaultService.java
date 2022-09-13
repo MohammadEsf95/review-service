@@ -55,6 +55,7 @@ public class ScoreDefaultService implements ScoreService {
         scoreRepository.save(
                 score.changeSubmitted(submitStatus)
         );
+        //TODO ADD QUERY TO CALCULATE AVERAGE SCORE FOR PRODUCT
         return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }
 }
