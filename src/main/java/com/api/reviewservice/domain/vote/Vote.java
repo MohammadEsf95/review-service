@@ -4,8 +4,6 @@ import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "votes")
@@ -39,6 +37,12 @@ public class Vote extends BaseEntity {
 
     public Product getProduct() {
         return product;
+    }
+
+
+    public Vote changeSubmitted() {
+        this.isSubmitted = !this.isSubmitted;
+        return this;
     }
 
     @Override

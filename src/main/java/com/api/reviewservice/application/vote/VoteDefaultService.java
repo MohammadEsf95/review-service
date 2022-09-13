@@ -2,6 +2,7 @@ package com.api.reviewservice.application.vote;
 
 import com.api.reviewservice.application.util.responsedto.SuccessfulResponseDTO;
 import com.api.reviewservice.application.vote.dto.CreateVoteDTO;
+import com.api.reviewservice.application.vote.dto.VoteDTO;
 import com.api.reviewservice.domain.product.Product;
 import com.api.reviewservice.domain.product.ProductRepository;
 import com.api.reviewservice.domain.vote.Vote;
@@ -10,6 +11,9 @@ import com.api.reviewservice.infrastructure.ApplicationMessages;
 import com.api.reviewservice.infrastructure.exception.ExceptionMessages;
 import com.api.reviewservice.infrastructure.exception.applicationexception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VoteDefaultService implements VoteService {
@@ -31,5 +35,22 @@ public class VoteDefaultService implements VoteService {
                 CreateVoteDTO.to(createVoteDTO,product)
         );
         return new SuccessfulResponseDTO(vote.getId(), ApplicationMessages.OPERATION_COMPLETED.getTitle());
+    }
+
+    @Override
+    public List<VoteDTO> findAllByProductId(UUID productId) {
+        List<Vote> votes = voteRepository.findAllByProductId(productId);
+        return VoteDTO.from(votes);
+    }
+
+    @Override
+    public SuccessfulResponseDTO submitOrRejectVote(UUID voteId) {
+        Vote vote = voteRepository.findById(voteId).orElseThrow(
+                () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
+        );
+        voteRepository.save(
+                vote.changeSubmitted()
+        );
+        return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }
 }
