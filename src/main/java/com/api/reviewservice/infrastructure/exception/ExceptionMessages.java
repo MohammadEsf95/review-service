@@ -1,7 +1,8 @@
 package com.api.reviewservice.infrastructure.exception;
 
 public enum ExceptionMessages {
-    RECORD_NOT_FOUND(8, "Record not found."),
+    RECORD_NOT_FOUND(0, "Record not found."),
+    CANNOT_SUBMIT_SCORE_OR_COMMENT(1, "Cannot submit score or comment."),
     ;
 
     private final int index;

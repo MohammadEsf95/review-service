@@ -9,6 +9,7 @@ import com.api.reviewservice.domain.score.Score;
 import com.api.reviewservice.domain.score.ScoreRepository;
 import com.api.reviewservice.infrastructure.ApplicationMessages;
 import com.api.reviewservice.infrastructure.exception.ExceptionMessages;
+import com.api.reviewservice.infrastructure.exception.applicationexception.CannotSubmitScoreOrComment;
 import com.api.reviewservice.infrastructure.exception.applicationexception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,9 @@ public class ScoreDefaultService implements ScoreService {
         Product product = productRepository.findById(createScoreDTO.productId()).orElseThrow(
                 () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
         );
+        if (!product.isScoreable())
+          throw new CannotSubmitScoreOrComment(ExceptionMessages.CANNOT_SUBMIT_SCORE_OR_COMMENT.getTitle());
+
         Score score = scoreRepository.save(
                 CreateScoreDTO.to(createScoreDTO,product)
         );

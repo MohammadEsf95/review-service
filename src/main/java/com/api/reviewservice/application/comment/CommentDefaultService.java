@@ -9,6 +9,7 @@ import com.api.reviewservice.domain.product.Product;
 import com.api.reviewservice.domain.product.ProductRepository;
 import com.api.reviewservice.infrastructure.ApplicationMessages;
 import com.api.reviewservice.infrastructure.exception.ExceptionMessages;
+import com.api.reviewservice.infrastructure.exception.applicationexception.CannotSubmitScoreOrComment;
 import com.api.reviewservice.infrastructure.exception.applicationexception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,8 @@ public class CommentDefaultService implements CommentService {
         Product product  = productRepository.findById(createCommentDTO.productId()).orElseThrow(
                 () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
         );
+        if (!product.isCommentable())
+            throw new CannotSubmitScoreOrComment(ExceptionMessages.CANNOT_SUBMIT_SCORE_OR_COMMENT.getTitle());
         Comment comment = commentRepository.save(
                 CreateCommentDTO.to(createCommentDTO, product)
         );
