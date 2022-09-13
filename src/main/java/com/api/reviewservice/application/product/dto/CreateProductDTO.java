@@ -22,6 +22,7 @@ public record CreateProductDTO(
         return new Product(
                 createProductDTO.name(),
                 provider,
+                false,
                 createProductDTO.showComments(),
                 createProductDTO.showVotes(),
                 createProductDTO.commentable(),

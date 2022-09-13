@@ -43,4 +43,13 @@ public class ProductController {
                 )
         );
     }
+
+    @PatchMapping
+    public ResponseEntity<Object> showOrHideProduct(@PathVariable UUID id) {
+        return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
+                new SuccessfulRequestResponseEntity<>(
+                        productService.showOrHideProduct(id)
+                )
+        );
+    }
 }

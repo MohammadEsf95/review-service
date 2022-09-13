@@ -19,6 +19,8 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "provider_id")
     private Provider provider;
 
+    @Column(name = "is_visible")
+    private boolean isVisible;
     @Column(name = "show_comments")
     private boolean showComments;
 
@@ -40,9 +42,10 @@ public class Product extends BaseEntity {
     public Product() {
     }
 
-    public Product(String name, Provider provider, boolean showComments, boolean showVotes, boolean hasComment, boolean votable) {
+    public Product(String name, Provider provider, boolean isVisible, boolean showComments, boolean showVotes, boolean hasComment, boolean votable) {
         this.name = name;
         this.provider = provider;
+        this.isVisible = isVisible;
         this.showComments = showComments;
         this.showVotes = showVotes;
         this.commentable = hasComment;
@@ -57,6 +60,10 @@ public class Product extends BaseEntity {
 
     public Provider getProvider() {
         return provider;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
     }
 
     public boolean isShowComments() {
@@ -82,11 +89,16 @@ public class Product extends BaseEntity {
     public boolean isVotable() {
         return votable;
     }
+    public Product changeShow() {
+        this.isVisible = !this.isVisible;
+        return this;
+    }
 
     @Override
     public String toString() {
         return "Product{" +
                 "provider=" + provider +
+                ", isVisible=" + isVisible +
                 ", showComments=" + showComments +
                 ", showVotes=" + showVotes +
                 ", hasComment=" + commentable +

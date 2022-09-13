@@ -47,4 +47,15 @@ public class ProductDefaultService implements ProductService {
                 productRepository.count()
         );
     }
+
+    @Override
+    public SuccessfulResponseDTO showOrHideProduct(UUID id) {
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
+        );
+        productRepository.save(
+                product.changeShow()
+        );
+        return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
+    }
 }

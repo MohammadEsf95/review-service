@@ -38,7 +38,7 @@ public class VoteController {
     }
 
     @PatchMapping
-    public ResponseEntity<Object> submitOrRejectComment(@PathVariable UUID voteId) {
+    public ResponseEntity<Object> submitOrRejectVote(@PathVariable UUID voteId) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
                         voteService.submitOrRejectVote(voteId)

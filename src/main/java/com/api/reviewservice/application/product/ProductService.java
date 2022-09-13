@@ -12,4 +12,6 @@ public interface ProductService {
     SuccessfulResponseDTO create(CreateProductDTO createProductDTO);
 
     PageDTO<ProductDTO> findAll(UUID providerId, Pageable pageable);
+
+    SuccessfulResponseDTO showOrHideProduct(UUID id);
 }
