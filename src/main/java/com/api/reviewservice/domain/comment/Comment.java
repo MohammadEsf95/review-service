@@ -41,6 +41,11 @@ public class Comment extends BaseEntity {
         return isSubmitted;
     }
 
+    public Comment changeSubmitted() {
+        this.isSubmitted = !this.isSubmitted;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

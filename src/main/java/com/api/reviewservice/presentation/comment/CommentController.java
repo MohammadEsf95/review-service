@@ -36,4 +36,13 @@ public class CommentController {
                 )
         );
     }
+
+    @PatchMapping
+    public ResponseEntity<Object> submitOrRejectComment(@PathVariable UUID commentId) {
+        return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
+                new SuccessfulRequestResponseEntity<>(
+                        commentService.submitOrRejectComment(commentId)
+                )
+        );
+    }
 }

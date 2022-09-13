@@ -11,4 +11,6 @@ public interface CommentService {
     SuccessfulResponseDTO create(CreateCommentDTO createCommentDTO);
 
     List<CommentDTO> findAllByProductId(UUID productId);
+
+    SuccessfulResponseDTO submitOrRejectComment(UUID commentId);
 }

@@ -42,4 +42,15 @@ public class CommentDefaultService implements CommentService {
         List<Comment> comments = commentRepository.findAllByProductId(productId);
         return CommentDTO.from(comments);
     }
+
+    @Override
+    public SuccessfulResponseDTO submitOrRejectComment(UUID commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
+        );
+        commentRepository.save(
+                comment.changeSubmitted()
+        );
+        return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
+    }
 }
