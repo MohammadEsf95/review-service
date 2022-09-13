@@ -13,5 +13,5 @@ public interface VoteService {
 
     List<VoteDTO> findAllByProductId(UUID productId);
 
-    SuccessfulResponseDTO submitOrRejectVote(UUID voteId);
+    SuccessfulResponseDTO submitOrRejectVote(UUID voteId, String submitStatus);
 }

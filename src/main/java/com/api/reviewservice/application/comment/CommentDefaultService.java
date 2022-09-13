@@ -44,12 +44,12 @@ public class CommentDefaultService implements CommentService {
     }
 
     @Override
-    public SuccessfulResponseDTO submitOrRejectComment(UUID commentId) {
+    public SuccessfulResponseDTO changeSubmitStatus(UUID commentId, String submitStatus) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
         );
         commentRepository.save(
-                comment.changeSubmitted()
+                comment.changeSubmitted(submitStatus)
         );
         return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }

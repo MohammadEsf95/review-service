@@ -44,12 +44,12 @@ public class VoteDefaultService implements VoteService {
     }
 
     @Override
-    public SuccessfulResponseDTO submitOrRejectVote(UUID voteId) {
+    public SuccessfulResponseDTO submitOrRejectVote(UUID voteId, String submitStatus) {
         Vote vote = voteRepository.findById(voteId).orElseThrow(
                 () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
         );
         voteRepository.save(
-                vote.changeSubmitted()
+                vote.changeSubmitted(submitStatus)
         );
         return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }

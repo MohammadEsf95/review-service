@@ -1,6 +1,7 @@
 package com.api.reviewservice.domain.comment;
 
 import com.api.reviewservice.domain.BaseEntity;
+import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
@@ -17,16 +18,17 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "is_submitted")
-    private boolean isSubmitted;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "submit_status")
+    private SubmitStatus submitStatus;
 
     public Comment() {
     }
 
-    public Comment(String text, Product product, boolean isSubmitted) {
+    public Comment(String text, Product product, SubmitStatus submitStatus) {
         this.text = text;
         this.product = product;
-        this.isSubmitted = isSubmitted;
+        this.submitStatus = submitStatus;
     }
 
     public String getText() {
@@ -37,12 +39,12 @@ public class Comment extends BaseEntity {
         return product;
     }
 
-    public boolean isSubmitted() {
-        return isSubmitted;
+    public SubmitStatus getSubmitStatus() {
+        return submitStatus;
     }
 
-    public Comment changeSubmitted() {
-        this.isSubmitted = !this.isSubmitted;
+    public Comment changeSubmitted(String submitStatus) {
+        this.submitStatus = SubmitStatus.getFromString(submitStatus);
         return this;
     }
 
@@ -51,7 +53,7 @@ public class Comment extends BaseEntity {
         return "Comment{" +
                 "text='" + text +
                 ", product=" + product +
-                ", isSubmitted=" + isSubmitted +
+                ", submitStatus=" + submitStatus +
                 '}' + super.toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.vote.dto;
 
+import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.vote.Vote;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ public record VoteDTO(
         UUID id,
         LocalDateTime createDate,
         int score,
-        boolean isSubmitted
+        SubmitStatus isSubmitted
 ) {
     public static List<VoteDTO> from(List<Vote> votes) {
         return votes.stream().map(VoteDTO::from).collect(Collectors.toList());
@@ -22,7 +23,7 @@ public record VoteDTO(
                 vote.getId(),
                 vote.getCreateDate(),
                 vote.getScore(),
-                vote.isSubmitted()
+                vote.getSubmitStatus()
         );
     }
 }

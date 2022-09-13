@@ -12,5 +12,5 @@ public interface CommentService {
 
     List<CommentDTO> findAllByProductId(UUID productId);
 
-    SuccessfulResponseDTO submitOrRejectComment(UUID commentId);
+    SuccessfulResponseDTO changeSubmitStatus(UUID commentId, String submitStatus);
 }

@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.comment.dto;
 
+import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.comment.Comment;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ public record CommentDTO(
         UUID id,
         LocalDateTime createDate,
         String text,
-        boolean isSubmitted
+        SubmitStatus submitStatus
 ) {
     public static List<CommentDTO> from(List<Comment> comments) {
         return comments.stream().map(CommentDTO::from).collect(Collectors.toList());
@@ -22,7 +23,7 @@ public record CommentDTO(
                 comment.getId(),
                 comment.getCreateDate(),
                 comment.getText(),
-                comment.isSubmitted()
+                comment.getSubmitStatus()
         );
     }
 }

@@ -38,10 +38,13 @@ public class CommentController {
     }
 
     @PatchMapping
-    public ResponseEntity<Object> submitOrRejectComment(@PathVariable UUID commentId) {
+    public ResponseEntity<Object> changeSubmitStatus(
+            @RequestParam UUID commentId,
+            @RequestParam String submitStatus
+    ) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
-                        commentService.submitOrRejectComment(commentId)
+                        commentService.changeSubmitStatus(commentId, submitStatus)
                 )
         );
     }

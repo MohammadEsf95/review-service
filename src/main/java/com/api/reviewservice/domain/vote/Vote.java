@@ -1,6 +1,7 @@
 package com.api.reviewservice.domain.vote;
 
 import com.api.reviewservice.domain.BaseEntity;
+import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.product.Product;
 
 import javax.persistence.*;
@@ -11,8 +12,9 @@ public class Vote extends BaseEntity {
     @Column(name = "score")
     private int score;
 
-    @Column(name = "is_submitted")
-    private boolean isSubmitted;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "submit_status")
+    private SubmitStatus submitStatus;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -21,9 +23,9 @@ public class Vote extends BaseEntity {
     public Vote() {
     }
 
-    public Vote(int score, boolean isSubmitted, Product product) {
+    public Vote(int score, SubmitStatus isSubmitted, Product product) {
         this.score = score;
-        this.isSubmitted = isSubmitted;
+        this.submitStatus = isSubmitted;
         this.product = product;
     }
 
@@ -31,8 +33,8 @@ public class Vote extends BaseEntity {
         return score;
     }
 
-    public boolean isSubmitted() {
-        return isSubmitted;
+    public SubmitStatus getSubmitStatus() {
+        return submitStatus;
     }
 
     public Product getProduct() {
@@ -40,8 +42,8 @@ public class Vote extends BaseEntity {
     }
 
 
-    public Vote changeSubmitted() {
-        this.isSubmitted = !this.isSubmitted;
+    public Vote changeSubmitted(String submitStatus) {
+        this.submitStatus = SubmitStatus.getFromString(submitStatus);
         return this;
     }
 
@@ -49,7 +51,7 @@ public class Vote extends BaseEntity {
     public String toString() {
         return "Vote{" +
                 "score=" + score +
-                ", isSubmitted=" + isSubmitted +
+                ", submitStatus=" + submitStatus +
                 ", product=" + product +
                 '}' + super.toString();
     }

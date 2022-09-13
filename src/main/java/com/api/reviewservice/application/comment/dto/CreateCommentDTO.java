@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.comment.dto;
 
+import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.comment.Comment;
 import com.api.reviewservice.domain.product.Product;
 
@@ -15,7 +16,7 @@ public record CreateCommentDTO(
         return new Comment(
                 createCommentDTO.text(),
                 product,
-                false
+                SubmitStatus.NOT_SPECIFIED
         );
     }
 }
