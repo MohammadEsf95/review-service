@@ -5,10 +5,9 @@ import com.api.reviewservice.application.comment.dto.CreateCommentDTO;
 import com.api.reviewservice.presentation.responseentity.ResponseEntityUtil;
 import com.api.reviewservice.presentation.responseentity.response.SuccessfulRequestResponseEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/comment")
@@ -25,6 +24,15 @@ public class CommentController {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
                         commentService.create(createCommentDTO)
+                )
+        );
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> findAllByProductId(@RequestParam UUID productId) {
+        return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
+                new SuccessfulRequestResponseEntity<>(
+                        commentService.findAllByProductId(productId)
                 )
         );
     }

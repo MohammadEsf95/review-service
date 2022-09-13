@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.comment;
 
+import com.api.reviewservice.application.comment.dto.CommentDTO;
 import com.api.reviewservice.application.comment.dto.CreateCommentDTO;
 import com.api.reviewservice.application.util.responsedto.SuccessfulResponseDTO;
 import com.api.reviewservice.domain.comment.Comment;
@@ -10,6 +11,9 @@ import com.api.reviewservice.infrastructure.ApplicationMessages;
 import com.api.reviewservice.infrastructure.exception.ExceptionMessages;
 import com.api.reviewservice.infrastructure.exception.applicationexception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CommentDefaultService implements CommentService {
@@ -31,5 +35,11 @@ public class CommentDefaultService implements CommentService {
                 CreateCommentDTO.to(createCommentDTO, product)
         );
         return new SuccessfulResponseDTO(comment.getId(), ApplicationMessages.OPERATION_COMPLETED.getTitle());
+    }
+
+    @Override
+    public List<CommentDTO> findAllByProductId(UUID productId) {
+        List<Comment> comments = commentRepository.findAllByProductId(productId);
+        return CommentDTO.from(comments);
     }
 }
