@@ -1,7 +1,7 @@
-package com.api.reviewservice.presentation.vote;
+package com.api.reviewservice.presentation.score;
 
-import com.api.reviewservice.application.vote.VoteService;
-import com.api.reviewservice.application.vote.dto.CreateVoteDTO;
+import com.api.reviewservice.application.score.ScoreService;
+import com.api.reviewservice.application.score.dto.CreateScoreDTO;
 import com.api.reviewservice.presentation.responseentity.ResponseEntityUtil;
 import com.api.reviewservice.presentation.responseentity.response.SuccessfulRequestResponseEntity;
 import org.springframework.http.ResponseEntity;
@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/vote")
-public class VoteController {
+@RequestMapping(path = "/score")
+public class ScoreController {
 
-    private final VoteService voteService;
+    private final ScoreService scoreService;
 
-    public VoteController(VoteService voteService) {
-        this.voteService = voteService;
+    public ScoreController(ScoreService scoreService) {
+        this.scoreService = scoreService;
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody CreateVoteDTO createVoteDTO) {
+    public ResponseEntity<Object> create(@RequestBody CreateScoreDTO createScoreDTO) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
-                        voteService.create(createVoteDTO)
+                        scoreService.create(createScoreDTO)
                 )
         );
     }
@@ -32,19 +32,19 @@ public class VoteController {
     public ResponseEntity<Object> findAllByProductId(@RequestParam UUID productId) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
-                        voteService.findAllByProductId(productId)
+                        scoreService.findAllByProductId(productId)
                 )
         );
     }
 
     @PatchMapping
-    public ResponseEntity<Object> submitOrRejectVote(
-            @RequestParam UUID voteId,
+    public ResponseEntity<Object> submitOrRejectScore(
+            @RequestParam UUID id,
             @RequestParam String submitStatus
             ) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
-                        voteService.submitOrRejectVote(voteId, submitStatus)
+                        scoreService.submitOrRejectScore(id, submitStatus)
                 )
         );
     }

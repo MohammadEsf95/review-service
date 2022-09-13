@@ -13,7 +13,7 @@ public record ProductDTO(
         LocalDateTime createDate,
         LocalDateTime updateDate,
         boolean hasComments,
-        boolean hasVotes
+        boolean hasScores
 ) {
 
     public static List<ProductDTO> from(List<Product> products) {
@@ -26,7 +26,7 @@ public record ProductDTO(
                 product.getCreateDate(),
                 product.getUpdateDate(),
                 product.isCommentable(),
-                product.isVotable()
+                product.isScoreable()
         );
     }
 }

@@ -12,10 +12,10 @@ public record CreateProductDTO(
         @NotNull UUID providerId,
         boolean show,
         boolean showComments,
-        boolean showVotes,
+        boolean showScores,
         boolean showRatings,
         boolean commentable,
-        boolean votable
+        boolean scoreable
 ) {
 
     public static Product to(CreateProductDTO createProductDTO, Provider provider) {
@@ -24,9 +24,9 @@ public record CreateProductDTO(
                 provider,
                 false,
                 createProductDTO.showComments(),
-                createProductDTO.showVotes(),
+                createProductDTO.showScores(),
                 createProductDTO.commentable(),
-                createProductDTO.votable()
+                createProductDTO.scoreable()
         );
     }
 }

@@ -54,7 +54,7 @@ public class ProductController {
         );
     }
 
-    @PatchMapping(path = "commentable-votable")
+    @PatchMapping(path = "commentable-scoreable")
     public ResponseEntity<Object> changeCommentableAndVotable(
             @RequestBody ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO
     ) {

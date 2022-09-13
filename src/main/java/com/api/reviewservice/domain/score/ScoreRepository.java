@@ -1,4 +1,4 @@
-package com.api.reviewservice.domain.vote;
+package com.api.reviewservice.domain.score;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 @Repository
-public interface VoteRepository extends JpaRepository<Vote, UUID> {
-    List<Vote> findAllByProductId(UUID productId);
+public interface ScoreRepository extends JpaRepository<Score, UUID> {
+    List<Score> findAllByProductId(UUID productId);
 }

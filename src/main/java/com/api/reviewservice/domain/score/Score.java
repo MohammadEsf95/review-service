@@ -1,4 +1,4 @@
-package com.api.reviewservice.domain.vote;
+package com.api.reviewservice.domain.score;
 
 import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.SubmitStatus;
@@ -7,10 +7,10 @@ import com.api.reviewservice.domain.product.Product;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "votes")
-public class Vote extends BaseEntity {
-    @Column(name = "score")
-    private int score;
+@Table(name = "scores")
+public class Score extends BaseEntity {
+    @Column(name = "number")
+    private int number;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "submit_status")
@@ -20,17 +20,17 @@ public class Vote extends BaseEntity {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Vote() {
+    public Score() {
     }
 
-    public Vote(int score, SubmitStatus isSubmitted, Product product) {
-        this.score = score;
+    public Score(int number, SubmitStatus isSubmitted, Product product) {
+        this.number = number;
         this.submitStatus = isSubmitted;
         this.product = product;
     }
 
-    public int getScore() {
-        return score;
+    public int getNumber() {
+        return number;
     }
 
     public SubmitStatus getSubmitStatus() {
@@ -42,15 +42,15 @@ public class Vote extends BaseEntity {
     }
 
 
-    public Vote changeSubmitted(String submitStatus) {
+    public Score changeSubmitted(String submitStatus) {
         this.submitStatus = SubmitStatus.getFromString(submitStatus);
         return this;
     }
 
     @Override
     public String toString() {
-        return "Vote{" +
-                "score=" + score +
+        return "Score{" +
+                "number=" + number +
                 ", submitStatus=" + submitStatus +
                 ", product=" + product +
                 '}' + super.toString();

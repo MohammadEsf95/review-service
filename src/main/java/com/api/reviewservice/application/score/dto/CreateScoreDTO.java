@@ -1,19 +1,19 @@
-package com.api.reviewservice.application.vote.dto;
+package com.api.reviewservice.application.score.dto;
 
 import com.api.reviewservice.domain.SubmitStatus;
 import com.api.reviewservice.domain.product.Product;
-import com.api.reviewservice.domain.vote.Vote;
+import com.api.reviewservice.domain.score.Score;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-public record CreateVoteDTO(
+public record CreateScoreDTO(
         @NotNull int score,
         @NotNull UUID productId
         ) {
-    public static Vote to(CreateVoteDTO createVoteDTO, Product product) {
-        return new Vote(
-                createVoteDTO.score(),
+    public static Score to(CreateScoreDTO createScoreDTO, Product product) {
+        return new Score(
+                createScoreDTO.score(),
                 SubmitStatus.NOT_SPECIFIED,
                 product
         );

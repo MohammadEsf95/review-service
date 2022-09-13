@@ -3,7 +3,7 @@ package com.api.reviewservice.domain.product;
 import com.api.reviewservice.domain.BaseEntity;
 import com.api.reviewservice.domain.comment.Comment;
 import com.api.reviewservice.domain.provider.Provider;
-import com.api.reviewservice.domain.vote.Vote;
+import com.api.reviewservice.domain.score.Score;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,31 +27,31 @@ public class Product extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private Set<Comment> comments;
 
-    @Column(name = "show_votes")
-    private boolean showVotes;
+    @Column(name = "show_scores")
+    private boolean showScores;
 
     @Column(name = "commentable")
     private boolean commentable;
 
-    @Column(name = "votable")
-    private boolean votable;
+    @Column(name = "scoreable")
+    private boolean scoreable;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private Set<Vote> votes;
+    private Set<Score> scores;
 
     public Product() {
     }
 
-    public Product(String name, Provider provider, boolean isVisible, boolean showComments, boolean showVotes, boolean hasComment, boolean votable) {
+    public Product(String name, Provider provider, boolean isVisible, boolean showComments, boolean showScores, boolean hasComment, boolean scoreable) {
         this.name = name;
         this.provider = provider;
         this.isVisible = isVisible;
         this.showComments = showComments;
-        this.showVotes = showVotes;
+        this.showScores = showScores;
         this.commentable = hasComment;
-        this.votable = votable;
+        this.scoreable = scoreable;
         this.comments = new HashSet<>();
-        this.votes = new HashSet<>();
+        this.scores = new HashSet<>();
     }
 
     public String getName() {
@@ -74,29 +74,29 @@ public class Product extends BaseEntity {
         return comments;
     }
 
-    public boolean isShowVotes() {
-        return showVotes;
+    public boolean isShowScores() {
+        return showScores;
     }
 
-    public Set<Vote> getVotes() {
-        return votes;
+    public Set<Score> getScores() {
+        return scores;
     }
 
     public boolean isCommentable() {
         return commentable;
     }
 
-    public boolean isVotable() {
-        return votable;
+    public boolean isScoreable() {
+        return scoreable;
     }
     public Product changeShow() {
         this.isVisible = !this.isVisible;
         return this;
     }
 
-    public Product changeCommentableAndVotable(boolean commentable, boolean votable) {
+    public Product changeCommentableAndVotable(boolean commentable, boolean scoreable) {
         this.commentable = commentable;
-        this.votable = votable;
+        this.scoreable = scoreable;
         return this;
     }
 
@@ -106,9 +106,9 @@ public class Product extends BaseEntity {
                 "provider=" + provider +
                 ", isVisible=" + isVisible +
                 ", showComments=" + showComments +
-                ", showVotes=" + showVotes +
+                ", showScores=" + showScores +
                 ", hasComment=" + commentable +
-                ", hasVote=" + votable +
+                ", scoreable=" + scoreable +
                 '}' + super.toString();
     }
 }
