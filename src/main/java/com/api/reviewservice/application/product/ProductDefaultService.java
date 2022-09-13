@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.product;
 
+import com.api.reviewservice.application.product.dto.ChangeCommentableAndVotableDTO;
 import com.api.reviewservice.application.product.dto.CreateProductDTO;
 import com.api.reviewservice.application.product.dto.ProductDTO;
 import com.api.reviewservice.application.util.pagination.PageDTO;
@@ -55,6 +56,19 @@ public class ProductDefaultService implements ProductService {
         );
         productRepository.save(
                 product.changeShow()
+        );
+        return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
+    }
+
+    @Override
+    public SuccessfulResponseDTO changeCommentableAndVotable(ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO) {
+        Product product = productRepository.findById(changeCommentableAndVotableDTO.id()).orElseThrow(
+                () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())
+        );
+        productRepository.save(
+                product.changeCommentableAndVotable(
+                        changeCommentableAndVotableDTO.commentable(), changeCommentableAndVotableDTO.votable()
+                )
         );
         return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }

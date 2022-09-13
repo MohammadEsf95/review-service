@@ -94,6 +94,12 @@ public class Product extends BaseEntity {
         return this;
     }
 
+    public Product changeCommentableAndVotable(boolean commentable, boolean votable) {
+        this.commentable = commentable;
+        this.votable = votable;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

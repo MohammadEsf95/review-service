@@ -1,5 +1,6 @@
 package com.api.reviewservice.application.product;
 
+import com.api.reviewservice.application.product.dto.ChangeCommentableAndVotableDTO;
 import com.api.reviewservice.application.product.dto.CreateProductDTO;
 import com.api.reviewservice.application.product.dto.ProductDTO;
 import com.api.reviewservice.application.util.pagination.PageDTO;
@@ -14,4 +15,6 @@ public interface ProductService {
     PageDTO<ProductDTO> findAll(UUID providerId, Pageable pageable);
 
     SuccessfulResponseDTO showOrHideProduct(UUID id);
+
+    SuccessfulResponseDTO changeCommentableAndVotable(ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO);
 }

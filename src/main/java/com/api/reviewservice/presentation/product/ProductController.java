@@ -1,6 +1,7 @@
 package com.api.reviewservice.presentation.product;
 
 import com.api.reviewservice.application.product.ProductService;
+import com.api.reviewservice.application.product.dto.ChangeCommentableAndVotableDTO;
 import com.api.reviewservice.application.product.dto.CreateProductDTO;
 import com.api.reviewservice.application.util.pagination.PaginationDTO;
 import com.api.reviewservice.presentation.responseentity.ResponseEntityUtil;
@@ -44,11 +45,22 @@ public class ProductController {
         );
     }
 
-    @PatchMapping
+    @PatchMapping(path = "show-hide")
     public ResponseEntity<Object> showOrHideProduct(@PathVariable UUID id) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
                         productService.showOrHideProduct(id)
+                )
+        );
+    }
+
+    @PatchMapping(path = "commentable-votable")
+    public ResponseEntity<Object> changeCommentableAndVotable(
+            @RequestBody ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO
+    ) {
+        return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
+                new SuccessfulRequestResponseEntity<>(
+                        productService.changeCommentableAndVotable(changeCommentableAndVotableDTO)
                 )
         );
     }
