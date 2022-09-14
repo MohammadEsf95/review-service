@@ -16,7 +16,7 @@ public class Score extends BaseEntity {
     @Column(name = "submit_status")
     private SubmitStatus submitStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -52,7 +52,6 @@ public class Score extends BaseEntity {
         return "Score{" +
                 "number=" + number +
                 ", submitStatus=" + submitStatus +
-                ", product=" + product +
                 '}' + super.toString();
     }
 }

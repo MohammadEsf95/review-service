@@ -12,11 +12,13 @@ import com.api.reviewservice.infrastructure.exception.ExceptionMessages;
 import com.api.reviewservice.infrastructure.exception.applicationexception.CannotSubmitScoreOrComment;
 import com.api.reviewservice.infrastructure.exception.applicationexception.RecordNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ScoreDefaultService implements ScoreService {
 
     private final ScoreRepository scoreRepository;
@@ -55,7 +57,10 @@ public class ScoreDefaultService implements ScoreService {
         scoreRepository.save(
                 score.changeSubmitted(submitStatus)
         );
-        //TODO ADD QUERY TO CALCULATE AVERAGE SCORE FOR PRODUCT
+        float averageScore = scoreRepository.calculateAverageScore(score.getProduct().getId());
+        productRepository.save(
+                score.getProduct().updateAverageScore(averageScore)
+        );
         return new SuccessfulResponseDTO(ApplicationMessages.OPERATION_COMPLETED.getTitle());
     }
 }

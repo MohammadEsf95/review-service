@@ -107,15 +107,21 @@ public class Product extends BaseEntity {
         return this;
     }
 
+
+    public Product updateAverageScore(float averageScore) {
+        this.averageScore = averageScore;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "provider=" + provider +
-                ", isVisible=" + isVisible +
+                "name='" + name + '\'' +
                 ", averageScore=" + averageScore +
+                ", isVisible=" + isVisible +
                 ", showComments=" + showComments +
                 ", showScores=" + showScores +
-                ", hasComment=" + commentable +
+                ", commentable=" + commentable +
                 ", scoreable=" + scoreable +
                 '}' + super.toString();
     }

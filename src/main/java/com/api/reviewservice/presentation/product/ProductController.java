@@ -1,7 +1,7 @@
 package com.api.reviewservice.presentation.product;
 
 import com.api.reviewservice.application.product.ProductService;
-import com.api.reviewservice.application.product.dto.ChangeCommentableAndVotableDTO;
+import com.api.reviewservice.application.product.dto.ChangeCommentableAndScoreableDTO;
 import com.api.reviewservice.application.product.dto.CreateProductDTO;
 import com.api.reviewservice.application.util.pagination.PaginationDTO;
 import com.api.reviewservice.presentation.responseentity.ResponseEntityUtil;
@@ -45,7 +45,7 @@ public class ProductController {
         );
     }
 
-    @PatchMapping(path = "show-hide")
+    @PatchMapping(path = "show-hide/{id}")
     public ResponseEntity<Object> showOrHideProduct(@PathVariable UUID id) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
@@ -56,11 +56,11 @@ public class ProductController {
 
     @PatchMapping(path = "commentable-scoreable")
     public ResponseEntity<Object> changeCommentableAndVotable(
-            @RequestBody ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO
+            @RequestBody ChangeCommentableAndScoreableDTO changeCommentableAndScoreableDTO
     ) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
-                        productService.changeCommentableAndVotable(changeCommentableAndVotableDTO)
+                        productService.changeCommentableAndVotable(changeCommentableAndScoreableDTO)
                 )
         );
     }

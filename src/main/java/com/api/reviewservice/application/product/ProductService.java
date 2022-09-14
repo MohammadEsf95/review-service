@@ -1,6 +1,6 @@
 package com.api.reviewservice.application.product;
 
-import com.api.reviewservice.application.product.dto.ChangeCommentableAndVotableDTO;
+import com.api.reviewservice.application.product.dto.ChangeCommentableAndScoreableDTO;
 import com.api.reviewservice.application.product.dto.CreateProductDTO;
 import com.api.reviewservice.application.product.dto.ProductDTO;
 import com.api.reviewservice.application.util.pagination.PageDTO;
@@ -16,5 +16,5 @@ public interface ProductService {
 
     SuccessfulResponseDTO showOrHideProduct(UUID id);
 
-    SuccessfulResponseDTO changeCommentableAndVotable(ChangeCommentableAndVotableDTO changeCommentableAndVotableDTO);
+    SuccessfulResponseDTO changeCommentableAndVotable(ChangeCommentableAndScoreableDTO changeCommentableAndScoreableDTO);
 }
