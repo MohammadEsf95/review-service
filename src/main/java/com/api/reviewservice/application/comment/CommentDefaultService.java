@@ -47,6 +47,12 @@ public class CommentDefaultService implements CommentService {
     }
 
     @Override
+    public List<CommentDTO> findLastThreeByProductId(UUID productId) {
+        List<Comment> comments = commentRepository.findLastThreeByProductId(productId);
+        return CommentDTO.from(comments);
+    }
+
+    @Override
     public SuccessfulResponseDTO changeSubmitStatus(UUID commentId, String submitStatus) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new RecordNotFoundException(ExceptionMessages.RECORD_NOT_FOUND.getTitle())

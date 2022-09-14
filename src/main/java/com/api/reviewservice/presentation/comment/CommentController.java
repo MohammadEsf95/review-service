@@ -37,6 +37,15 @@ public class CommentController {
         );
     }
 
+    @GetMapping(path = "/last-three/{productId}")
+    public ResponseEntity<Object> findLastThreeByProductId(@PathVariable UUID productId) {
+        return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
+                new SuccessfulRequestResponseEntity<>(
+                        commentService.findLastThreeByProductId(productId)
+                )
+        );
+    }
+
     @PatchMapping
     public ResponseEntity<Object> changeSubmitStatus(
             @RequestParam UUID commentId,
