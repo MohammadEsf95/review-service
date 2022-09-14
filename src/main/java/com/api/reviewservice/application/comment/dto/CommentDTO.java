@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public record CommentDTO(
         UUID id,
         LocalDateTime createDate,
+        LocalDateTime updateDate,
         String text,
         SubmitStatus submitStatus
 ) {
@@ -22,6 +23,7 @@ public record CommentDTO(
         return new CommentDTO(
                 comment.getId(),
                 comment.getCreateDate(),
+                comment.getUpdateDate(),
                 comment.getText(),
                 comment.getSubmitStatus()
         );

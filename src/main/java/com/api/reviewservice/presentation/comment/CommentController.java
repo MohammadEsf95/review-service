@@ -28,8 +28,8 @@ public class CommentController {
         );
     }
 
-    @GetMapping
-    public ResponseEntity<Object> findAllByProductId(@RequestParam UUID productId) {
+    @GetMapping(path = "/{productId}")
+    public ResponseEntity<Object> findAllByProductId(@PathVariable UUID productId) {
         return ResponseEntityUtil.generateSuccessfulRequestResponseEntity(
                 new SuccessfulRequestResponseEntity<>(
                         commentService.findAllByProductId(productId)
